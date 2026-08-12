@@ -1,0 +1,14 @@
+from typing import List, Optional
+from sqlalchemy.orm import Mapped, mapped_column, relationship
+from app.database import Base
+from app.models.product import Product
+from sqlalchemy import ForeignKey
+
+class Basket(Base):
+    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
+
+    quantity: Mapped[int] = mapped_column(default=1)
+
+    product_id: Mapped[int] = mapped_column(ForeignKey("product.id"))
+
+    product: Mapped[List["Product"]] = relationship(back_populates="basket_items")

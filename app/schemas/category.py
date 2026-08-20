@@ -13,4 +13,4 @@ class CategoryResponse(BaseModel):
 
     id: int
     title: str
-    product: list[ProductResponse]
+    

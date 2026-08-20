@@ -28,6 +28,8 @@ class BasketService:
                 detail="basket not found",
             )
 
+        return basket
+
     def basket_delete(self, basket_id: int) -> None:
         basket = self.get_basket(basket_id)
 

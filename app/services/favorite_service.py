@@ -20,7 +20,7 @@ class FavoriteService:
         return self.repository.get_all()
 
     def get_favorite(self, favorite_id: int) -> Favorite:
-        favorite = self.repository.get_all(favorite_id)
+        favorite = self.repository.get_by_id(favorite_id)
 
         if favorite is None:
             raise HTTPException(

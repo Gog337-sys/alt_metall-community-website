@@ -3,22 +3,31 @@ import os, sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from fastapi import FastAPI
-
-
 from app.database import Base, engine
-from app.config.config import get_settings
-from app.api.items import router as items_router
 
-settings = get_settings()
+from app.models.category import Category
+from app.models.product import Product
+from app.models.favorite import Favorite
+from app.models.basket import Basket
+
+
+from app.handlers.product import router as product_router
+from app.handlers.favorite import router as favorite_router
+from app.handlers.category import router as category_router
+from app.handlers.basket import router as basket_router
+
 
 app = FastAPI()
 
-app.include_router(items_router)
-
 Base.metadata.create_all(bind=engine)
+
+app.include_router(product_router)
+app.include_router(favorite_router)
+app.include_router(category_router)
+app.include_router(basket_router)
 
 @app.get("/")
 def root():
     return{
-        "message": f"{settings.app_name} is running"
+        "message running"
     }

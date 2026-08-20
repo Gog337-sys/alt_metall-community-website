@@ -12,7 +12,9 @@ class CategoryService:
 
     def create_category(self, schema: CategoryCreate):
 
-        category = Category(**schema.model_dump())
+        category = Category(
+            title=schema.title,
+        )
 
         return self.repository.create(category)
 
@@ -44,5 +46,12 @@ class CategoryService:
 
     def delete_category(self, category_id: int) -> None:
         category = self.get_category(category_id)
+
+        
+        if len(category.products) > 0:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Нельзя удалить категорию, содержащую товары. Сначала перенесите или удалите товары."
+            )
 
         self.repository.delete(category)

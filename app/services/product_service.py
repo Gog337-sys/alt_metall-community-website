@@ -12,7 +12,15 @@ class ProductService:
 
     def create_product(self, schema: ProductCreate):
         
-        product = Product(**schema.model_dump())
+        product = Product(
+            title=schema.title,
+            description=schema.description,
+            category_id=schema.category_id,  
+            brand=schema.brand,
+            price=schema.price,
+            rating=schema.rating if hasattr(schema, 'rating') else 0, 
+            thumbnail=schema.thumbnail,
+        )
 
         return self.repository.create(product)
 

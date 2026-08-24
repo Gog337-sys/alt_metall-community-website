@@ -138,3 +138,6 @@ xkit==0.0.0
 xlrd==1.2.0
 yt-dlp==2022.4.8
 zipp==1.0.0
+bcrypt==3.2.2
+passlib[bcrypt]
+python-jose[cryptography]

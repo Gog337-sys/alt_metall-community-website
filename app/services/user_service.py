@@ -23,6 +23,7 @@ class UserService:
         user = User(
             email=schema.email,
             hashed_password=hash_password(schema.password),
+            phone=schema.phone,
             is_active=True,
             role=UserRole.USER.value,
         )

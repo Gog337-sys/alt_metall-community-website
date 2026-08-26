@@ -20,6 +20,7 @@ class User(Base):
         nullable=False,
     )
     hashed_password: Mapped[str] = mapped_column(String(255), nullable=False)
+    phone: Mapped[str | None] = mapped_column(String(20), unique=True, nullable=True, index=True)
     is_active: Mapped[bool] = mapped_column(Boolean, default=True, nullable=False)
     role: Mapped[str] = mapped_column(
         String(50),
